@@ -7,7 +7,7 @@
 const randomNumber = Math.round(Math.random() * 100);
 console.log(randomNumber);
 
-//? Variables
+//? Variables decleration
 let score = 10;
 //let topScore = 0;
 

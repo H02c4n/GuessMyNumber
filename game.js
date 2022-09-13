@@ -9,9 +9,12 @@ console.log(randomNumber);
 
 //? Variables
 let score = 10;
-let topScore = 0;
+//let topScore = 0;
+
+let topScore = localStorage.getItem("topScore") || 0;
 
 //* CheckBtn basildiginda kontrolleri yap
+document.querySelector(".top-score").textContent = topScore;
 document.querySelector(".check-btn").addEventListener("click", () => {
   const guessInput = Number(document.querySelector(".guess-input").value);
   const msg = document.querySelector(".msg");
@@ -25,9 +28,11 @@ document.querySelector(".check-btn").addEventListener("click", () => {
     msg.innerHTML = `Congrats You Win <i class="fa-solid fa-face-grin-hearts fa-2x"></i> `;
     body.className = "bg-success";
     document.querySelector(".check-btn").disabled = true;
-    if (score > topScore) {
-      topScore = score;
-      document.querySelector(".top-score").textContent = topScore;
+    if (score >= topScore) {
+      localStorage.setItem("topScore", score);
+
+      //topScore = score;
+      document.querySelector(".top-score").textContent = score;
     }
     document.querySelector(".secret-number").textContent = randomNumber;
 
@@ -53,7 +58,7 @@ document.querySelector(".check-btn").addEventListener("click", () => {
 document.querySelector(".again-btn").addEventListener("click", () => {
   score = 10;
   document.querySelector(".score").textContent = score;
-  const randomNumber = Math.round(Math.random() * 100);
+  randomNumber = Math.round(Math.random() * 100);
   document.querySelector(".secret-number").textContent = "?";
   console.log(randomNumber);
   document.querySelector(".check-btn").disabled = false;
@@ -62,18 +67,11 @@ document.querySelector(".again-btn").addEventListener("click", () => {
   document.querySelector(".msg").innerText = `Starting..`;
 });
 
-//? eger score > topScore
-//?     topScore = score
-//? secret_number = gorunur.
+//! LOCAL STORAGE AND SESSION STORAGE
+// myObj = { a: 1, b: 2, c: 3 };
 
-//! değilse
-//! eger score > 0
-//!   score = score -1
-//?   eğer rasgele < input.value
-//?     AZALT
-//?   degilse
-//?     ARTTIR
-//! degise
-//? Uzgunuz kaybetiniz.
+// localStorage.setItem("obj", JSON.stringify(myObj));
 
-//* againBtn basildiginda kontrolleri yap
+// const readObj = JSON.parse(localStorage.getItem("obj"));
+
+// console.log(readObj);
